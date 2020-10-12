@@ -5,6 +5,7 @@
 # @File    : afm.py
 
 import tensorflow as tf
+
 from utils.common import LinearModel, EmbedModel
 
 

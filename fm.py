@@ -4,6 +4,7 @@
 # @Author  : Roamoin
 # @File    : fm.py
 import tensorflow as tf
+
 from utils.common import LinearModel, EmbedModel
 
 

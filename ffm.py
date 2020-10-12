@@ -5,7 +5,8 @@
 # @File    : ffm.py
 
 import tensorflow as tf
-from utils.common import LinearModel, FieldAwareEmbedModel
+
+from utils.common import LinearModel
 
 
 class FieldAwareFactorzationMachine(tf.keras.Model):

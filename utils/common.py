@@ -56,3 +56,19 @@ class FieldAwareEmbedModel(tf.keras.Model):
             tf.expand_dims(embedding(x), 2) for embedding in self.embeddings
         ] # [(none, len(feature_cards), factor_dim), ....]长度为len(feature_cards)
         return tf.constant(outputs, 2)
+
+
+class FullyConnectedNetwork(tf.keras.Model):
+    def __init__(self, units, drop_out=.1, name='fcn'):
+        super().__init__(name=name)
+        self.layers = []
+        for i, unit in enumerate(units):
+            self.layers.append(tf.keras.layers.Dense(unit, name=name+'/fc{}'.format(i)))
+            if drop_out>0:
+                self.layers.append(tf.keras.layers.Dropout(drop_out, name=name+'dropout{}'.format(i)))
+            if unit != 1:
+                self.layers.append(tf.keras.layers.ReLU(name=name+'/active{}'.fromat(i)))
+        self.model = tf.keras.Sequential(self.layers)
+
+    def call(self, inputs, training=False):
+        return self.model(inputs, training=training)
