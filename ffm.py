@@ -24,3 +24,14 @@ class FieldAwareFactorzationMachine(tf.keras.Model):
             tf.reduce_sum(tf.linalg.band_part(interactions, 0, -1) - tf.linalg.band_part(interactions, 0, 0),
                           axis=(1, 2)), -1)  # (none,1)
         return linear_out + interaction_out
+
+
+if __name__ == '__main__':
+    x = [[1, 0, 3],
+         [1, 0, 3],
+         [1, 0, 3]]
+    feature_cards = [3, 4, 5]
+    factor_dim = 2
+    model = FieldAwareFactorzationMachine(feature_cards, factor_dim)
+    result = model(x)
+    assert result.shape == (3, 1)
